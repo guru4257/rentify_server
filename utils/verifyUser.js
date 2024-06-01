@@ -17,11 +17,11 @@ export const verifyToken = async(req, res, next) => {
   // });
    
   const id = String(req.params.id)
-
+  console.log(id)
   const user = {
-     _id : id
+     "_id" : id
   }
-  
+
   console.log(user)
   req.user = user;
   next()
