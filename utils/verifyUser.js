@@ -4,8 +4,6 @@ import User from '../models/user.model.js';
 import mongoose from 'mongoose';
 
 
-const ObjectId = mongoose.Types.ObjectId;
-
 export const verifyToken = async(req, res, next) => {
   const token = req.cookies.access_token;
 
@@ -18,8 +16,12 @@ export const verifyToken = async(req, res, next) => {
   //   next();
   // });
    
-  const id = new ObjectId(String(req.params.id))
-  const user = await User.find_one({'_id':id})
+  const id = String(req.params.id)
+
+  const user = {
+     _id : id
+  }
+  
   console.log(user)
   req.user = user;
   next()
