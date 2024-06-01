@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 
 const ObjectId = mongoose.Types.ObjectId;
 
-export const verifyToken = (req, res, next) => {
+export const verifyToken = async(req, res, next) => {
   const token = req.cookies.access_token;
 
   // if (!token) return next(errorHandler(401, 'Unauthorized'));
@@ -19,8 +19,8 @@ export const verifyToken = (req, res, next) => {
   // });
    
   const id = new ObjectId(String(req.params.id))
-  const user = User.find({'_id':id})
-
+  const user = await User.find_one({'_id':id})
+  console.log(user)
   req.user = user;
   next()
 
